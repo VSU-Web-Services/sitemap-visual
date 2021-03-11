@@ -54,6 +54,9 @@ $("#search-url").hide();
 $( "#search" ).change(function() {
   var search = $(this).children("option:selected").val();
 
+   $(".on-page-search").val("");
+   $(".on-page-title-search").val("");
+
   if ( search == "title" ) {
     $("#search-title").show();
     $("#search-url").hide();
@@ -65,7 +68,7 @@ $( "#search" ).change(function() {
 });
 
 $(".on-page-title-search").on("keyup", function() {
-  $("button").removeClass("active");
+  $("button.filter").removeClass("active");
   var x = $(this).val();
   $(".results").removeClass("results");
   $(".noresults").removeClass("noresults");
@@ -79,7 +82,7 @@ $(".on-page-title-search").on("keyup", function() {
 });
 
 $(".on-page-search").on("keyup", function() {
-  $("button").removeClass("active");
+  $("button.filter").removeClass("active");
   var v = $(this).val();
   $(".results").removeClass("results");
   $(".noresults").removeClass("noresults");
