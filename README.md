@@ -29,3 +29,6 @@ There is a live version located here: https://www.vsu.edu/sitemap-visual.php
 
 ---
 
+User is presented with sitemap-visual search with all results listed
+
+![start](screenshots/sitemap-visual-start.JPG)
