@@ -49,95 +49,154 @@ getXMLSitemapObject(sitemapFile, function(sitemapObject) {
     }
 });
 
-$( "button" ).click(function() { // Clear search input function 
+$("#search-url").hide();
+
+$( "#search" ).change(function() {
+  var search = $(this).children("option:selected").val();
+
+  if ( search == "title" ) {
+    $("#search-title").show();
+    $("#search-url").hide();
+  } 
+  else if ( search == "url" ) {
+    $("#search-title").hide();
+    $("#search-url").show();
+  }
+});
+
+$(".on-page-title-search").on("keyup", function() {
+  $("button").removeClass("active");
+  var x = $(this).val();
+  $(".results").removeClass("results");
+  $(".noresults").removeClass("noresults");
+  $("div.sitemap-page a.btn").each(function() {
+    if (x != "" && $(this).text().search(new RegExp(x, 'gi')) != -1) {
+      $(this).parent().addClass("results").show();
+    } else if (x != "" && $(this).text().search(x) != 1) {
+      $(this).parent().addClass("noresults").hide();
+    }
+  });
+});
+
+$(".on-page-search").on("keyup", function() {
+  $("button").removeClass("active");
+  var v = $(this).val();
+  $(".results").removeClass("results");
+  $(".noresults").removeClass("noresults");
+  $("div.sitemap-page a.textlink").each(function() {
+    if (v != "" && $(this).text().search(new RegExp(v, 'gi')) != -1) {
+      $(this).parent().addClass("results").show();
+    } else if (v != "" && $(this).text().search(v) != 1) {
+      $(this).parent().addClass("noresults").hide();
+    }
+  });
+});
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+
+$( "button.filter" ).click(function() { // Clear search input function 
     $(".on-page-search").val("");
+    $(".on-page-title-search").val("");
 });
 
 $( "#showAll" ).click(function() { // Show all function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").show();
 });
 
 $( "#showAlways" ).click(function() { // Show Always function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page.always").show();
 });
 
 $( "#showDaily" ).click(function() { // Show Daily function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page.daily").show();
 });
 
 $( "#showWeekly" ).click(function() { // Show Weekly function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page.weekly").show();
 });
 
 $( "#showMonthly" ).click(function() { // Show Monthly function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page.monthly").show();
 });
 
 $( "#showYearly" ).click(function() { // Show Yearly function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page.yearly").show();
 });
 
 $( "#showNever" ).click(function() { // Show Never function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page.never").show();
 });
 
 $( "#showTop" ).click(function() { // Show Top Search function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page[data-priority='1.0']").show();
 });
 
 $( "#showSecond" ).click(function() { // Show Top Search function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page[data-priority='0.8']").show();
 });
 
 $( "#showAverage" ).click(function() { // Show Top Search function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page[data-priority='0.6']").show();
 });
 
 $( "#showDeep" ).click(function() { // Show Top Search function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page[data-priority='0.4']").show();
 });
 
 $( "#showLow" ).click(function() { // Show Top Search function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page[data-priority='0.2']").show();
 });
 
 $( "#showArchive" ).click(function() { // Show Top Search function 
-    $("button").removeClass("active");
+    $("button.filter").removeClass("active");
     $(this).addClass('active');
     $(".sitemap-page").hide();
     $(".sitemap-page[data-priority='0.0']").show();
@@ -162,34 +221,6 @@ function parseXMLSitemap(sitemapContent) {
     var parser = new DOMParser();
     var xmlDoc = parser.parseFromString(sitemapContent, 'text/xml');
     return xmlDoc;
-}
-
-$(".on-page-search").on("keyup", function() {
-  var v = $(this).val();
-  $(".results").removeClass("results");
-  $(".noresults").removeClass("noresults");
-  $("div.sitemap-page a").each(function() {
-    if (v != "" && $(this).text().search(new RegExp(v, 'gi')) != -1) {
-      $(this).addClass("results");
-    } else if (v != "" && $(this).text().search(v) != 1) {
-      $(this).parent().addClass("noresults");
-    }
-  });
-});
-
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  });
 }
 
 
