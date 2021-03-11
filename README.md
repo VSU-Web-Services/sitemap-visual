@@ -29,6 +29,14 @@ There is a live version located here: https://www.vsu.edu/sitemap-visual.php
 
 ---
 
-User is presented with sitemap-visual search with all results listed
+User is presented with sitemap-visual search with all results listed and page results
 
 ![start](screenshots/sitemap-visual-start.JPG)
+
+By default, search text input can be filered by keywords, page title, and URLs
+
+![options](screenshots/sitemap-visual-search-options.JPG)
+
+Under Advanced Filters, user is able to filter results by Search Priority and Page Frequency.  These search parameters are metadata found in https://www.vsu.edu/sitemap.xml
+
+![advanced](screenshots/sitemap-visual-advanced-filters.JPG)
