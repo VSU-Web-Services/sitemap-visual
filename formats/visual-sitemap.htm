@@ -1,0 +1,184 @@
+<style type="text/css">
+
+div.col-md-4 {
+    text-align: left !important;
+}
+
+a.btn.btn-sm.btn-primary, button.btn.btn-sm.btn-primary {
+    border-radius: 10px !important;
+}
+a.btn.btn-sm.btn-primary.active, button.btn.btn-sm.btn-primary.active {
+    background-color: #0d2852;
+}
+select, option {
+    font-size: 18px;
+    line-height: 32px;
+    color: #787d85;
+    background-color: #fcfcfc;
+    border: 1px solid #e0e1e1;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    background-color: #0d2852;
+    border-radius: 10px !important;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    overflow: hidden;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 1.4s;
+    display: inline-block;
+    border-radius: 10px !important;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #0d2852;
+    border-radius: 10px !important;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.accordion.active, .accordion:hover.active {
+    background-color: rgba(245, 128, 37, 1.0);;
+    border-radius: 10px !important;
+    color: #000;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 0px;
+    background-color: aliceblue;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 25px;
+    transition: max-height 0.8s ease-out;
+    padding: 10px;
+}
+
+.panel div.row button.btn {
+    background-color: #fff !important;
+    margin: 2px;
+}
+
+button.btn.active, .panel div.row button.btn.active {
+    background-color: #0047bb !important;
+}
+
+
+button.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    padding: 3px 3px 3px 3px;
+    background-color: #cc3a00;
+    border-radius: 25px;
+    color: #fff;
+    float: right;
+    margin-left: 0px;
+    text-shadow: 2px 1px orange;
+}
+
+button.accordion.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    text-shadow: 2px 1px orange;
+}
+
+/* Style the input */
+.on-page-search, .on-page-title-search, .on-page-keywords-search {
+    width: 75%;
+    font-size: 14px;
+    line-height: 26px;
+    color: #787d85;
+    background-color: #fcfcfc;
+    border: 1px solid #e0e1e1;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+/* Style the list */
+.sitemap-page {}
+/* Style the results */
+/*
+div.sitemap-page.noresults) {
+    display: none;
+}
+
+.results {
+    background: aliceblue;
+    color: black;
+}
+
+.results:hover {
+    background: #fff;
+    color: black;
+}
+*/
+</style>
+
+<section class="visual-sitemap">
+    <div class="container">
+        <h1>Visual Sitemap</h1><br />
+        
+        <div class="row">
+            <div class="col-md-6" style="text-align: left;">
+                <div id="search-title"><label for="search-title"> <strong>Search Title :</strong> </label>&#160; &#160;<input class="on-page-title-search" name="search-title" type="text" /></div>
+                <div id="search-keywords"><label for="search-keywords"> <strong>Search Keywords :</strong> </label>&#160; &#160;<input class="on-page-keywords-search" name="search-keywords" type="text" /></div>
+                <div id="search-url"><label for="search-url"> <strong>Search (URL) :&#160;</strong></label><input class="on-page-search" name="search-url" type="text" />&#160;</div>
+            </div>
+            <div class="col-md-6" style="text-align: left;">
+                <strong>Page Results : </strong> <span id="resultcount"></span>&#160; 
+            </div>
+            <br />
+        </div><br />
+        
+        <div class="row">
+            <div class="col-md-6">
+                <label for="search"> <strong>Search Options :&#160;</strong> </label>
+                <select id="search" name="search">
+                   <option value="title">Title</option>
+                   <option value="keywords">Keywords</option>
+                   <option value="url">(URL)</option>
+                </select>&#160;
+            </div>
+            
+            <div class="col-md-6">
+                <button id="showAll" class="btn btn-sm btn-primary active filter">Reset / All Results</button>
+            </div>
+        </div>
+        <div>&#160;</div>
+        <button class="accordion"> <b>Advanced Filters</b> </button>
+        <div class="panel"><br />
+        <div>&#9675; <strong>Filter by Search Priority : </strong></div>
+        <div class="row" style="text-align: center;">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showTop" class="btn btn-sm btn-primary filter">Top Search</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showSecond" class="btn btn-sm btn-primary filter">Secondary</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showAverage" class="btn btn-sm btn-primary filter">Average</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showDeep" class="btn btn-sm btn-primary filter">Deep Level</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showLow" class="btn btn-sm btn-primary filter">Low Association</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showArchive" class="btn btn-sm btn-primary filter">Never Search</button></div>
+        </div>
+        <br />
+        <div>&#9675; <strong>Filter by Update Frequency : </strong></div>
+        <div class="row" style="text-align: center;">
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showAlways" class="btn btn-sm btn-primary filter">Always</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showDaily" class="btn btn-sm btn-primary filter">Daily</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showWeekly" class="btn btn-sm btn-primary filter">Weekly</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showMonthly" class="btn btn-sm btn-primary filter">Monthly</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showYearly" class="btn btn-sm btn-primary filter">Yearly</button></div>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2"><button id="showNever" class="btn btn-sm btn-primary filter">Never (Archive)</button></div>
+        </div>
+        &#8203;</div>
+    
+        <div id="sitemap-wrapper">&#8203;</div>
+    </div><!-- /.container -->
+    <br />
+    <div class="col-md-12" style="text-align: center;"><strong>Daily Update : </strong>12:00 am (&#160; <em>Eastern Time&#160;</em>)&#160;&#9675; <strong>XML Datasource :</strong> <a href="https://www.vsu.edu/sitemap.xml" target="_blank" rel="noopener">https://www.vsu.edu/sitemap.xml</a></div>
+    <br />
+</section><!-- /.visual-sitemap -->
+
+<script type="text/javascript" src="/files/js/site-map.js?v=1.0.0"></script>

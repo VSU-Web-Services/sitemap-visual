@@ -1,0 +1,95 @@
+#set($websiteURL = "https://www.vsu.edu")
+#set($site = $currentPage.Site)
+#set($extension = ".php")
+
+#set ( $pages = $_XPathTool.selectNodes($contentRoot, "//system-page[is-published][last-published-on][title]") )
+
+$_SortTool.addSortCriterion("title", "en", "text", "ascending", "upper-first")
+$_SortTool.sort($pages)
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+#foreach ( $p in $pages )
+    #set ( $path = $p.getChild("path").value )
+    #set ( $last = $p.getChild("last-modified") )
+    #set ( $gettitle = $p.getChild("title") )
+    #set ( $getkey = $p.getChild("keywords") ) 
+    #set ( $getdescription = $p.getChild("description") )
+    #set ( $getteaser = $p.getChild("teaser") ) 
+    #set ( $getsummary = $p.getChild("summary") ) 
+    
+    #set ( $getfreq = $_XPathTool.selectSingleNode($p, "dynamic-metadata[name='frequency']/value") )
+    #set ( $getpri = $_XPathTool.selectSingleNode($p, "dynamic-metadata[name='priority']/value") )
+    
+    #set ( $passtitle = $_EscapeTool.xml($gettitle.value) )
+    #set ( $passfreq = $_EscapeTool.xml($getfreq.value) )
+    #set ( $passpri = $_EscapeTool.xml($getpri.value) )
+    #set ( $passkey = $_EscapeTool.xml($getkey.value) )
+    #set ( $passdescription = $_EscapeTool.xml($getdescription.value) )
+    #set ( $passteaser = $_EscapeTool.xml($getteaser.value) )
+    #set ( $passsummary = $_EscapeTool.xml($getsummary.value) )
+    
+    #if ( $passtitle )
+    #set ( $title = $passtitle )
+    #else
+    #set ( $title = 'VSU Webpage' )
+    #end
+    
+    #if ( $passfreq )
+    #set ( $freq = $passfreq )
+    #else
+    #set ( $freq = 'never')
+    #end
+    
+    #if ( $passpri )
+    #set ( $pri = $passpri )
+    #else
+    #set ( $pri = '0.0')
+    #end
+    
+    #if ( $p.getChild("keywords") )
+    #set ( $key = $passkey )
+    #else
+    #set ( $key = 'Add Keywords')
+    #end
+    
+    #if ( $p.getChild("description") )
+    #set ( $description = $passdescription )
+    #else
+    #set ( $description = 'Add Description')
+    #end
+    
+    #if ( $p.getChild("teaser") )
+    #set ( $teaser = $passteaser )
+    #else
+    #set ( $teaser = 'Add Teaser')
+    #end
+    
+    #if ( $p.getChild("summary") )
+    #set ( $summary = $passsummary )
+    #else
+    #set ( $summary = 'Add Summary')
+    #end
+    
+    <url>
+        <title>$title</title>
+        <loc>${websiteURL}${path}${extension}</loc>
+        <lastmod>#showDate($last.value, 'yyyy-MM-dd')</lastmod>
+        <changefreq>$freq</changefreq>
+        <priority>$pri</priority>
+        <keywords>$key</keywords>
+        <teaser>$teaser</teaser>
+        <summary>$summary</summary>
+        <description>$description</description>
+    </url>
+#end
+</urlset>
+
+#macro ( showDate $dateValue $formatString )
+#if ( $dateValue != "" )
+#set ( $dateObject = $_DateTool.getDate($dateValue) )
+#else
+#set ( $dateObject = $_DateTool.getDate() )
+#end
+#set ( $dateString = $_DateTool.format($formatString, $dateObject) )
+${dateString}
+#end
