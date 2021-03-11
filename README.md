@@ -48,3 +48,24 @@ As user types in search text input, results populate automatically, updating the
 Results display with an open graph image and metadata along with the URL and link of each page found.
 
 ![result](screenshots/sitemap-visual-result.JPG)
+
+---
+
+### Installation
+
+To have a local install of the working project you would need to have the following:
+
+- xampp
+- Sublime text editor
+- Download of local files through GitHub desktop app
+
+---
+
+## Overview
+
+The sitemap-visual app was developed in order to audit webpage metadata for SEO analysis.  A secondary function allows users to search the VSU website more effectively than the current search.
+
+---
+
+### Visual Sitemap Technical Functions
+
