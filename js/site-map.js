@@ -49,6 +49,10 @@ getXMLSitemapObject(sitemapFile, function(sitemapObject) {
     }
 });
 
+$( "button" ).click(function() { // Clear search input function 
+    $(".on-page-search").val("");
+});
+
 $( "#showAll" ).click(function() { // Show all function 
     $("button").removeClass("active");
     $(this).addClass('active');
@@ -158,6 +162,34 @@ function parseXMLSitemap(sitemapContent) {
     var parser = new DOMParser();
     var xmlDoc = parser.parseFromString(sitemapContent, 'text/xml');
     return xmlDoc;
+}
+
+$(".on-page-search").on("keyup", function() {
+  var v = $(this).val();
+  $(".results").removeClass("results");
+  $(".noresults").removeClass("noresults");
+  $("div.sitemap-page a").each(function() {
+    if (v != "" && $(this).text().search(new RegExp(v, 'gi')) != -1) {
+      $(this).addClass("results");
+    } else if (v != "" && $(this).text().search(v) != 1) {
+      $(this).parent().addClass("noresults");
+    }
+  });
+});
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
 }
 
 
