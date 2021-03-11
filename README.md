@@ -33,10 +33,18 @@ User is presented with sitemap-visual search with all results listed and page re
 
 ![start](screenshots/sitemap-visual-start.JPG)
 
-By default, search text input can be filered by keywords, page title, and URLs
+By default, search text input can be filered by **keywords**, **page title**, and **URLs**
 
 ![options](screenshots/sitemap-visual-search-options.JPG)
 
-Under Advanced Filters, user is able to filter results by Search Priority and Page Frequency.  These search parameters are metadata found in https://www.vsu.edu/sitemap.xml
+Under *Advanced Filters*, user is able to filter results by **Search Priority** and **Page Frequency**.  These search parameters are metadata found in https://www.vsu.edu/sitemap.xml
 
 ![advanced](screenshots/sitemap-visual-advanced-filters.JPG)
+
+As user types in search text input, results populate automatically, updating the **Page Results count**
+
+![results-list](screenshots/sitemap-visual-search.JPG)
+
+Results display with an open graph image and metadata along with the URL and link of each page found.
+
+![result](screenshots/sitemap-visual-result.JPG)
