@@ -69,3 +69,5 @@ The sitemap-visual app was developed in order to audit webpage metadata for SEO 
 
 ### Visual Sitemap Technical Functions
 
+
+
