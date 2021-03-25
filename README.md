@@ -68,6 +68,7 @@ The sitemap-visual app was developed in order to audit webpage metadata for SEO 
 ---
 
 ### Visual Sitemap Technical Functions
-
-
-
+- the sitemap.xml URL is fed into function `getXMLSitemapObject()` and `parseXMLSitemap()` in order to get sitemap content, parse and teturn a XML DOM object
+- a callback function with the parameter `sitemapObject` is ran to create an array of URLs which is iterated through, parsing metatag information of each entry
+- div elements are created with corresponding `changefreq` and `priority` dynamic metatag information
+- a `data` object literal of a deferred promise function generating the `title`, `loc`, `lastmod`, `changefreq`, and `priority` within html structure and appending it within the div elements created earlier.
